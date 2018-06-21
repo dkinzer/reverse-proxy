@@ -20,18 +20,17 @@ address = ":443"
 
 [entryPoints.https.tls]
 
-# Enable ACME (Let's Encrypt): automatic SSL
-[acme]
-# caServer = "https://acme-staging.api.letsencrypt.org/directory"
-email = "letsencrypt@devkinzer.net"
-storage = "acme.json" # or "traefik/acme/account" if using KV store
-entryPoint = "https"
-onDemand = false
-OnHostRule = true
-
-
 [docker]
 endpoint = "unix:///var/run/docker.sock"
 domain = "devkinzer.net"
 watch = true
 exposedbydefault = false
+
+# Enable ACME (Let's Encrypt): automatic SSL
+[acme]
+email = "letsencrypt@devkinzer.net"
+storage = "acme.json"
+entryPoint = "https"
+onHostRule = true
+[acme.httpChallenge]
+entryPoint = "http"
